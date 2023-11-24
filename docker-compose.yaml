@@ -1,0 +1,27 @@
+version: "3"
+
+services:
+  nginx-angular:
+    container_name: frontend
+    build:
+      context: ./frontend/
+      dockerfile: Dockerfile
+    ports:
+       - "8081:80"
+    expose:
+       - "8081"
+  keycloak:
+    build:
+      context: ./keycloak
+      dockerfile: Dockerfile
+    container_name: keycloak
+    environment:
+      DB_VENDOR: h2
+      DB_DATABASE: keycloak
+      DB_USER: keycloak
+      DB_PASSWORD: keycloak
+      KEYCLOAK_IMPORT: /tmp/realm-export.json -Dkeycloak.profile.feature.upload_scripts=enabled
+    volumes:
+      - ./keycloak/realm-export.json:/tmp/realm-export.json
+    ports:
+      - 8080:8080
