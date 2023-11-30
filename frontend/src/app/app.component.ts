@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { AuthService } from './init/auth.service';
 import { AccessTokenService } from './init/access-token.service';
-import { Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
 import { AccessTokenParsed } from './init/access-token-parsed.model';
 
 @Component({
@@ -16,10 +16,18 @@ import { AccessTokenParsed } from './init/access-token-parsed.model';
 })
 export class AppComponent {
   title = 'linking-frontend';
-  token$: Observable<AccessTokenParsed>;
+  token$: Observable<AccessTokenParsed | null> =  new Observable<null>;
 
-  public constructor(private authService: AuthService, private accessTokenService: AccessTokenService) {
-    this.token$ = accessTokenService.decodeToken();
+  public constructor(
+    private authService: AuthService,
+    private accessTokenService: AccessTokenService) {
+      accessTokenService.token().pipe(
+        map(data => {
+          if (data) {
+            this.token$ = accessTokenService.decodeToken();
+          }
+        })
+      ).subscribe();
   }
 
   public login(): void {
@@ -29,7 +37,7 @@ export class AppComponent {
     .subscribe();
   }
 
-  logout() {
+  public logout(): void {
     this.authService.logout('http://localhost:4200').subscribe();
   }
 }

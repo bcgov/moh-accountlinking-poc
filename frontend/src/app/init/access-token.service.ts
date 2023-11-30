@@ -9,7 +9,6 @@ import { AccessTokenParsed } from './access-token-parsed.model';
 
 export interface IAccessTokenService {
   token(): Observable<string>;
-  isTokenExpired(): boolean;
   decodeToken(): Observable<AccessTokenParsed | null>;
   clearToken(): void;
 }
@@ -26,10 +25,6 @@ export class AccessTokenService implements IAccessTokenService {
 
   public token(): Observable<string> {
     return from(this.keycloakService.getToken());
-  }
-
-  public isTokenExpired(): boolean {
-    return this.keycloakService.isTokenExpired();
   }
 
   public decodeToken(): Observable<AccessTokenParsed> {
