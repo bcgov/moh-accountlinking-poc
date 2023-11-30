@@ -1,4 +1,4 @@
-<h1 *ngIf="(token$ | async)">{{(token$ | async)?.preferred_username}} is connected!</h1>
+<h1 *ngIf="(token$ | async)">{{(token$ | async)?.name}} is connected!</h1>
 
 <button *ngIf="!(token$ | async)" (click)="login()">login</button>
 <button *ngIf="(token$ | async)" (click)="logout()">logout</button>
