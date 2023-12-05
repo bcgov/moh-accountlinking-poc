@@ -1,4 +1,5 @@
 import { KeycloakService } from "keycloak-angular";
+import { environment } from "../../environments/environment";
 
 export function initializeKeycloak(
   keycloak: KeycloakService
@@ -6,9 +7,9 @@ export function initializeKeycloak(
     return () =>
       keycloak.init({
         config: {
-          url: 'http://localhost:8080',
-          realm: 'master',
-          clientId: 'frontend',
+          url: environment.keycloak.url,
+          realm: environment.keycloak.realm,
+          clientId: environment.keycloak.clientId,
         },
         initOptions: {
           // this will solved the error

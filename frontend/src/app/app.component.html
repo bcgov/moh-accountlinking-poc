@@ -1,4 +1,11 @@
-<h1 *ngIf="(token$ | async)">{{(token$ | async)?.name}} is connected!</h1>
+<div *ngIf="(token$ | async)">
+  <h1>Logged in as</h1>
+  <h2>{{(token$ | async)?.name}} ({{(token$ | async)?.email}})</h2>
+</div>
 
-<button *ngIf="!(token$ | async)" (click)="login()">login</button>
-<button *ngIf="(token$ | async)" (click)="logout()">logout</button>
+<button *ngIf="(token$ | async) === null" (click)="login()">login</button>
+
+<div *ngIf="(token$ | async)">
+    <button (click)="linkAccount()">link account</button>
+    <button (click)="logout()">logout</button>
+</div>

@@ -1,0 +1,15 @@
+{
+  "singleQuote": true,
+  "bracketSameLine": true,
+  "importOrder": [
+    "^@angular/(.*)$",
+    "^@core/(.*)$",
+    "<THIRD_PARTY_MODULES>",
+    "^@server/(.*)$",
+    "^@ui/(.*)$",
+    "^[./]"
+  ],
+  "importOrderSeparation": true,
+  "importOrderSortSpecifiers": true,
+  "importOrderParserPlugins": ["typescript", "decorators-legacy"]
+}

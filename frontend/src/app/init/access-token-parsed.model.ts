@@ -1,6 +1,5 @@
 import { KeycloakTokenParsed } from 'keycloak-js';
 
-
 export interface AccessTokenParsed extends KeycloakTokenParsed {
   acr: string;
   'allowed-origins': string[];
@@ -14,4 +13,5 @@ export interface AccessTokenParsed extends KeycloakTokenParsed {
   sub: string;
   preferred_username: string;
   name: string;
+  email: string;
 }
