@@ -1,5 +1,9 @@
-<div *ngIf="(token$ | async)">
+@if(token$ | async) {
   <h1>Logged in as</h1>
   <h2>{{(token$ | async)?.name}} ({{(token$ | async)?.email}})</h2>
   <button (click)="logout()">Logout</button>
+}
+
+<div>
+  <button (click)="linkAccount()">Link your account with BC Provider test</button>
 </div>
