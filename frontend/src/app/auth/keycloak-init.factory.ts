@@ -1,19 +1,5 @@
-import { KeycloakService } from "keycloak-angular";
-import { environment } from "../../environments/environment";
+import { KeycloakInitService } from './keycloak-init.service';
 
-export function initializeKeycloak(
-  keycloak: KeycloakService
-  ) {
-    return () =>
-      keycloak.init({
-        config: {
-          url: environment.keycloak.url,
-          realm: environment.keycloak.realm,
-          clientId: environment.keycloak.clientId,
-        },
-        initOptions: {
-          // this will solved the error
-          checkLoginIframe: false
-        }
-      });
+export function initializeKeycloak(keycloakInitService: KeycloakInitService) {
+  return (): Promise<void> => keycloakInitService.load();
 }
