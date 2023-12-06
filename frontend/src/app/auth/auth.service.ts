@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { KeycloakService } from 'keycloak-angular';
 import { KeycloakLoginOptions } from 'keycloak-js';
-import { Observable, from, map } from 'rxjs';
+import { Observable, from, map, of } from 'rxjs';
 import { v4 as uuidv4 } from 'uuid';
 import { AccessTokenService } from './access-token.service';
 import { AccessTokenParsed } from './access-token-parsed.model';
@@ -9,21 +9,25 @@ import cryptojs from 'crypto-js';
 import { environment } from '../../environments/environment';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
-  token$: Observable<AccessTokenParsed | null> =  new Observable<null>;
+  token$: Observable<AccessTokenParsed | null> = new Observable<null>();
 
   constructor(
     private keycloakService: KeycloakService,
-    private accessTokenService: AccessTokenService) {
-    this.accessTokenService.token().pipe(
-      map(data => {
-        if (data) {
-          this.token$ = this.accessTokenService.decodeToken();
-        }
-      })
-    ).subscribe();
+    private accessTokenService: AccessTokenService,
+  ) {
+    this.accessTokenService
+      .token()
+      .pipe(
+        map((data) => {
+          if (data) {
+            this.token$ = this.accessTokenService.decodeToken();
+          }
+        }),
+      )
+      .subscribe();
   }
 
   public linkAccount(): void {
@@ -58,6 +62,10 @@ export class AuthService {
 
   public login(options?: KeycloakLoginOptions): Observable<void> {
     return from(this.keycloakService.login(options));
+  }
+
+  public isLoggedIn(): Observable<boolean> {
+    return of(this.keycloakService.isLoggedIn());
   }
 
   public logout(redirectUri?: string): Observable<void> {

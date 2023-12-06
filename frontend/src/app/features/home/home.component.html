@@ -1,0 +1,5 @@
+<div *ngIf="(token$ | async)">
+  <h1>Logged in as</h1>
+  <h2>{{(token$ | async)?.name}} ({{(token$ | async)?.email}})</h2>
+  <button (click)="logout()">Logout</button>
+</div>
