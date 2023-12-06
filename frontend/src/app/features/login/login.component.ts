@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../../auth/auth.service';
 import { environment } from '../../../environments/environment';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [],
+  imports: [MatButtonModule],
   providers: [AuthService],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',

@@ -5,11 +5,14 @@ import { AccessTokenService } from '../../auth/access-token.service';
 import { Observable, map } from 'rxjs';
 import { AccessTokenParsed } from '../../auth/access-token-parsed.model';
 import { CommonModule } from '@angular/common';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { MatToolbarModule } from '@angular/material/toolbar';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, MatToolbarModule, MatButtonModule, MatIconModule],
   providers: [AuthService, AccessTokenService],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css',

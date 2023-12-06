@@ -1,9 +1,26 @@
-@if(token$ | async) {
-  <h1>Logged in as</h1>
-  <h2>{{(token$ | async)?.name}} ({{(token$ | async)?.email}})</h2>
-  <button (click)="logout()">Logout</button>
-}
+<mat-toolbar color="primary">
+  <span>MoH Account linking POC</span>
+  <span class="mat-toolbar-spacer"></span>
+    <button mat-icon-button aria-label="Logout" (click)="logout()">
+      <mat-icon>logout</mat-icon>
+    </button>
+</mat-toolbar>
 
-<div>
-  <button (click)="linkAccount()">Link your account with BC Provider test</button>
+<div class="container">
+  <h2>User information</h2>
+  <ul>
+    <li>Name: <b>{{(token$ | async)?.name}}</b></li>
+    <li>Preferred username: <b>{{(token$ | async)?.preferred_username}}</b></li>
+    <li>Given name: <b>{{(token$ | async)?.given_name}}</b></li>
+    <li>Family name: <b>{{(token$ | async)?.family_name}}</b></li>
+    <li>Email: <b>{{(token$ | async)?.email}}</b></li>
+  </ul>
+
+  <hr />
+  <h2>Link your account with BC Provider test</h2>
+  <button mat-flat-button color="primary" (click)="linkAccount()">Link my account</button>
+</div>
+
+<div class="footer">
+  <p>MoH Account linking POC</p>
 </div>
