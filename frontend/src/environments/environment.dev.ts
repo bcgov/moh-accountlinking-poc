@@ -5,7 +5,7 @@ export const environment: AppEnvironment = {
   applicationUrl: 'http://localhost:4200',
   keycloak: {
     url: 'http://localhost:8080',
-    realm: 'master',
-    clientId: 'frontend'
-  }
+    realm: 'ExistingRealm',
+    clientId: 'frontend',
+  },
 };

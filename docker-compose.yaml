@@ -16,13 +16,15 @@ services:
       context: ./keycloak
       dockerfile: Dockerfile
     volumes:
-      - ./keycloak/realm-export.json:/opt/keycloak/data/import/realm-export.json
+      - ./keycloak/realms-export.json:/opt/keycloak/data/import/realms-export.json
     environment:
       KEYCLOAK_ADMIN: admin
       KEYCLOAK_ADMIN_PASSWORD: admin
-      KEYCLOAK_IMPORT: /opt/keycloak/data/import/realm-export.json -Dkeycloak.profile.feature.upload_scripts=enabled
-    command: 
+    command:
+      - "-Dkeycloak.migration.action=import"
+      - "-Dkeycloak.migration.provider=singleFile"
+      - "-Dkeycloak.migration.file=/opt/keycloak/data/import/realms-export.json"
+      - "-Dkeycloak.migration.strategy=IGNORE_EXISTING"
       - start-dev
-      - --import-realm
     ports:
       - 8080:8080
